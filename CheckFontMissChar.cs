@@ -14,7 +14,7 @@ public class CheckFontMissChar : MonoBehaviour
         if (TryGetComponent(out Text UiText))
         {
             //将3500常用字粘贴到text的文本框中
-            string input = UiText.text;
+            string input = UiText.text.Trim();
             //得到text的字体font
             var font = UiText.font;
             //要输出的文本内容
@@ -40,7 +40,7 @@ public class CheckFontMissChar : MonoBehaviour
             {
                 var character = input[i];
                 //如果无法得到对应字的信息
-                if (!font.GetCharacterInfo(character, out var info) && !uniChars.Contains(character))
+                if (!font.GetCharacterInfo(character, out var info) && !uniChars.Contains(character)&&!string.IsNullOrWhiteSpace(character.ToString()))
                 {
                     uniChars.Add(character);
                     missCount += 1;
